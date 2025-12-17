@@ -7,8 +7,8 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-green-50 via-white to-amber-50 pt-20 pb-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative bg-gradient-to-br from-green-50 via-white to-amber-50 min-h-screen flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight text-center lg:text-left">
