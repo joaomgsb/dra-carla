@@ -39,7 +39,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+              className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col"
             >
               <div className="mb-4 sm:mb-6">
                 <Quote className="w-10 h-10 sm:w-12 sm:h-12 text-green-200" />
@@ -49,10 +49,10 @@ export default function Testimonials() {
                   <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" />
                 ))}
               </div>
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6 italic text-justify">
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6 italic text-justify flex-grow">
                 "{testimonial.text}"
               </p>
-              <div className="flex items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-3 sm:gap-4 mt-auto">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-200 to-amber-200 rounded-full flex items-center justify-center">
                   <span className="text-green-700 font-bold text-base sm:text-lg">
                     {testimonial.name.charAt(0)}
