@@ -3,7 +3,7 @@ import WhatsAppIcon from './WhatsAppIcon';
 
 export default function About() {
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5542999511238?text=Olá! Gostaria de agendar uma avaliação.', '_blank');
+    window.open('https://wa.me/5542999278081?text=Olá! Gostaria de marcar uma consulta.', '_blank');
   };
 
   return (
@@ -11,7 +11,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-[28px] sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 px-2 leading-tight">
-            Quem e a{' '}
+            Quem é a{' '}
             <span className="text-green-600">Dra. Carla Kassiane?</span>
           </h2>
         </div>
@@ -21,7 +21,7 @@ export default function About() {
             <div className="aspect-[4/5] bg-gradient-to-br from-green-200 to-amber-200 rounded-3xl shadow-2xl overflow-hidden">
               <img
                 src="/images/foto2.jpeg"
-                alt="Dra. Carla Kassiane em ambiente clinico"
+                alt="Dra. Carla Kassiane em ambiente clínico"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -39,12 +39,12 @@ export default function About() {
 
           <div className="space-y-6">
             <p className="text-base sm:text-lg text-gray-700 leading-relaxed text-justify lg:text-left">
-              Fisioterapeuta com ampla experiencia em reabilitacao e tecnicas regenerativas.
+              Fisioterapeuta com ampla experiência em reabilitação e técnicas regenerativas.
               Atua com foco no atendimento integrativo e personalizado, promovendo bem-estar,
               mobilidade e qualidade de vida.
             </p>
             <p className="text-base sm:text-lg text-gray-700 leading-relaxed text-justify lg:text-left">
-              Sua missao e ajudar cada paciente a voltar a ser protagonista da propria vida,
+              Sua missão é ajudar cada paciente a voltar a ser protagonista da própria vida,
               com autonomia, leveza e movimento.
             </p>
 
@@ -72,7 +72,7 @@ export default function About() {
                 className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold px-6 sm:px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-base sm:text-lg"
               >
                 <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-                Agende pelo WhatsApp
+                Marque sua consulta
               </button>
             </div>
           </div>

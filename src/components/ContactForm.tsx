@@ -198,7 +198,7 @@ export default function ContactForm() {
             ) : (
               <>
                 <Send className="w-5 h-5" />
-                Quero Agendar Agora
+                Marque sua consulta
               </>
             )}
           </button>

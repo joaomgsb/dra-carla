@@ -11,7 +11,7 @@ export default function Benefits() {
   ];
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5542999511238?text=Olá! Gostaria de agendar uma avaliação.', '_blank');
+    window.open('https://wa.me/5542999278081?text=Olá! Gostaria de marcar uma consulta.', '_blank');
   };
 
   return (
@@ -51,7 +51,7 @@ export default function Benefits() {
                 className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
               >
                 <WhatsAppIcon className="w-5 h-5" />
-                Falar no WhatsApp Agora
+                Marque sua consulta
               </button>
               <p className="text-sm text-gray-600 text-center">
                 Resposta rápida • Atendimento humanizado

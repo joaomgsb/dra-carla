@@ -17,7 +17,7 @@ export default function WhatsAppButton() {
   }, []);
 
   const handleClick = () => {
-    window.open('https://wa.me/5542999511238?text=Olá! Gostaria de agendar uma avaliação.', '_blank');
+    window.open('https://wa.me/5542999278081?text=Olá! Gostaria de marcar uma consulta.', '_blank');
   };
 
   return (
@@ -26,7 +26,7 @@ export default function WhatsAppButton() {
       className={`fixed bottom-6 right-6 z-50 transition-all duration-500 hover:scale-110 group ${
         show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
       }`}
-      aria-label="Falar no WhatsApp"
+      aria-label="Marque sua consulta no WhatsApp"
     >
       <div className="relative">
         {/* Pulse Effect */}
@@ -52,7 +52,7 @@ export default function WhatsAppButton() {
         </div>
       </div>
       <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg border border-gray-100">
-        Fale Conosco
+        Marque sua consulta
       </span>
     </button>
   );

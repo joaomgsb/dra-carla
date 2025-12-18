@@ -11,8 +11,8 @@ export default function Location() {
     {
       icon: Phone,
       title: 'WhatsApp',
-      content: '(42) 99951-1238',
-      link: 'https://wa.me/5542999511238'
+      content: '(42) 99927-8081',
+      link: 'https://wa.me/5542999278081'
     },
     {
       icon: Mail,
@@ -40,10 +40,10 @@ export default function Location() {
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-[28px] sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 px-2 leading-tight">
             Sua saude{' '}
-            <span className="text-green-600">mais perto de voce!</span>
+            <span className="text-green-600">mais perto de você!</span>
           </h2>
           <p className="text-base sm:text-xl text-gray-600 px-2">
-            Visite nosso consultorio em Palmeira/PR
+            Visite nosso consultório em Palmeira/PR
           </p>
         </div>
 

@@ -122,7 +122,7 @@ export default function Hero() {
                   className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-3 sm:px-8 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-base sm:text-lg transform hover:scale-105 border-2 border-transparent hover:border-green-400"
                 >
                   <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
-                  Agendar Avaliação Gratuita
+                  Marque sua consulta
                 </button>
               </div>
             </div>
