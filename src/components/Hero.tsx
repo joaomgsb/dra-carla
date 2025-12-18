@@ -1,83 +1,164 @@
-import { Calendar } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const getBasePath = (src: string) => src.replace(/\.(png|jpe?g)$/i, '');
+  const getDesktopSrc = (src: string) => {
+    // Desktop: use .png only for images that actually have a .png variant.
+    // We know escritorio1/2/3 have both .jpeg and .png. Others (ex: foto3.jpg) may not.
+    if (/\.png$/i.test(src)) return src;
+    if (/\/images\/escritorio/i.test(src)) return `${getBasePath(src)}.png`;
+    return src; // fallback to original extension (jpg/jpeg)
+  };
+
+  const getMobileSrc = (src: string) => {
+    // Mobile: prefer .jpeg to reduce payload when a PNG exists.
+    // Exceção: no mobile, o slide da foto3 deve usar a foto1.
+    if (/\/images\/foto3\.jpg$/i.test(src)) return '/images/foto1.jpeg';
+    if (/\.png$/i.test(src)) return `${getBasePath(src)}.jpeg`;
+    return src; // keep jpg/jpeg
+  };
+
+  const slides = [
+    {
+      image: '/images/foto3.jpg',
+      title: 'Atendimento Personalizado e Humanizado',
+      subtitle: 'Cuidado especial em cada etapa do seu tratamento',
+      text: 'Experiência e dedicação para proporcionar o melhor resultado para sua saúde.',
+      position: 'object-[center_25%]' // Ajuste fino para focar no rosto
+    },
+    {
+      image: '/images/escritorio1.png',
+      title: 'Recupere seus movimentos, viva sem dor e com qualidade',
+      subtitle: 'Fisioterapia especializada com resultado para você voltar a ser protagonista da sua vida!',
+      text: 'Protocolos exclusivos que tratam a causa da dor e aceleram sua recuperação com técnicas integrativas e regenerativas.',
+      position: 'object-center'
+    },
+    {
+      image: '/images/escritorio2.png',
+      title: 'Tecnologia e Conforto para sua Reabilitação',
+      subtitle: 'Ambiente preparado para oferecer o melhor tratamento',
+      text: 'Espaço moderno e acolhedor pensado no seu bem-estar.',
+      position: 'object-center'
+    },
+    {
+      image: '/images/escritorio3.png',
+      title: 'Tratamentos Inovadores',
+      subtitle: 'As melhores técnicas da fisioterapia ao seu alcance',
+      text: 'Métodos comprovados para garantir sua recuperação plena.',
+      position: 'object-center'
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
   const handleCTAClick = () => {
     const formSection = document.getElementById('formulario');
     formSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-green-50 via-white to-amber-50 min-h-screen flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight text-center lg:text-left">
-              Recupere seus movimentos,{' '}
-              <span className="text-green-600">viva sem dor</span> e com qualidade
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed text-justify lg:text-left">
-              Fisioterapia especializada com resultado para voce voltar a ser protagonista da sua vida!
-            </p>
-            <p className="text-base sm:text-lg text-gray-700 text-justify lg:text-left">
-              Protocolos exclusivos que tratam a causa da dor e aceleram sua recuperacao com tecnicas integrativas e regenerativas.
-            </p>
-            <button
-              onClick={handleCTAClick}
-              className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold px-6 sm:px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-base sm:text-lg"
-            >
-              <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
-              Agendar Avaliacao Gratuita
-            </button>
-            <div className="flex flex-wrap gap-6 pt-4">
-              <div className="flex items-center gap-2">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-bold text-sm">✓</span>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900">CREFITO</p>
-                  <p className="text-sm text-gray-600">Regularizado</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-bold text-lg">+</span>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900">Anos de</p>
-                  <p className="text-sm text-gray-600">Experiência</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-bold text-xl">★</span>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900">100%</p>
-                  <p className="text-sm text-gray-600">Satisfação</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="relative">
-            <div className="aspect-square bg-gradient-to-br from-green-200 to-amber-200 rounded-3xl shadow-2xl overflow-hidden">
-              <img
-                src="/images/foto1.jpeg"
-                alt="Dra. Carla Kassiane - Fisioterapeuta"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div className="absolute bottom-4 right-4 sm:-bottom-6 sm:-right-6 bg-white p-4 sm:p-6 rounded-2xl shadow-xl max-w-[200px] sm:max-w-xs">
-              <p className="text-xs sm:text-sm text-gray-600 italic">
-                "Minha missão é ajudar voce a voltar a ser protagonista da sua vida"
+    <section id="inicio" className="relative h-screen min-h-[600px] w-full overflow-hidden">
+      {/* Slides */}
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 bg-black/50 z-10" />
+          <picture>
+            {/* Desktop (sm+) usa PNG */}
+            <source media="(min-width: 640px)" srcSet={getDesktopSrc(slide.image)} />
+            {/* Mobile usa JPEG/JPG */}
+            <img
+              src={getMobileSrc(slide.image)}
+              alt={`Slide ${index + 1}`}
+              className={`w-full h-full object-cover ${slide.position}`}
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+          </picture>
+          
+          {/* Content */}
+          <div className="absolute inset-0 z-20 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl w-full text-center text-white space-y-6 sm:space-y-8 animate-fade-in-up">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg">
+                {slide.title.includes('viva sem dor') ? (
+                  <>
+                    Recupere seus movimentos,{' '}
+                    <span className="text-green-400">viva sem dor</span> e com qualidade
+                  </>
+                ) : (
+                  slide.title
+                )}
+              </h1>
+              <p className="text-lg sm:text-xl lg:text-2xl font-light text-gray-100 drop-shadow-md">
+                {slide.subtitle}
               </p>
-              <p className="text-xs sm:text-sm font-semibold text-green-600 mt-2">
-                - Dra. Carla Kassiane
+              <p className="text-base sm:text-lg text-gray-200 max-w-2xl mx-auto hidden sm:block">
+                {slide.text}
               </p>
+              
+              <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button
+                  onClick={handleCTAClick}
+                  className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-3 sm:px-8 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-base sm:text-lg transform hover:scale-105 border-2 border-transparent hover:border-green-400"
+                >
+                  <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
+                  Agendar Avaliação Gratuita
+                </button>
+              </div>
             </div>
           </div>
         </div>
+      ))}
+
+      {/* Navigation Controls */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-sm transition-all text-white border border-white/30 hidden sm:block"
+      >
+        <ChevronLeft className="w-8 h-8" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-sm transition-all text-white border border-white/30 hidden sm:block"
+      >
+        <ChevronRight className="w-8 h-8" />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentSlide ? 'bg-green-500 w-8' : 'bg-white/50 hover:bg-white'
+            }`}
+          />
+        ))}
       </div>
+      
+      {/* Bottom Gradient for smooth transition */}
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent z-20"></div>
     </section>
   );
 }

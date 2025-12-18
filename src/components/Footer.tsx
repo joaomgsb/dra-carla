@@ -9,14 +9,22 @@ export default function Footer() {
           <p className="text-gray-400">
             Fisioterapia Integrativa e Regenerativa
           </p>
-          <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
-            <span>Feito com</span>
-            <Heart className="w-4 h-4 text-green-500 fill-green-500" />
-            <span>para seus pacientes</span>
+          <div className="pt-4 border-t border-gray-800">
+            <p className="text-xs text-gray-500 text-center">
+              © {new Date().getFullYear()} Dra. Carla Kassiane. Todos os direitos reservados.
+            </p>
+            <p className="text-xs text-gray-600 text-center mt-2 flex items-center justify-center gap-1">
+              Feito com <Heart className="w-3 h-3 text-red-500 fill-red-500" /> por{' '}
+              <a 
+                href="https://www.agenciadigitalprime.com.br" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-green-500 transition-colors duration-300 font-medium"
+              >
+                Agência Digital Prime
+              </a>
+            </p>
           </div>
-          <p className="text-xs text-gray-500 pt-4">
-            © {new Date().getFullYear()} Dra. Carla Kassiane. Todos os direitos reservados.
-          </p>
         </div>
       </div>
     </footer>
