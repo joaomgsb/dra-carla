@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dracarlakassiane.com.br/sitemap.xml
+
