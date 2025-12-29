@@ -73,6 +73,7 @@ export default function ContactForm() {
         serviceId,
         templateId,
         {
+          name: formData.nome_completo,
           nome_completo: formData.nome_completo,
           email: formData.email,
           whatsapp: formData.whatsapp,
