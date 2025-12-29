@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CheckCircle, Send } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import emailjs from '@emailjs/browser';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,20 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+
+  const motivoMap: Record<string, string> = {
+    "dor_lombar": "Dor Lombar",
+    "dor_joelho": "Dor no Joelho",
+    "pos_cirurgia": "Pós-Cirurgia",
+    "ergonomia": "Ergonomia / Empresas",
+    "pediatria": "Fisioterapia Pediátrica",
+    "regenerativa": "Fisioterapia Regenerativa",
+    "outro": "Outro"
+  };
+
+  const formatMotivo = (codigo: string): string => {
+    return motivoMap[codigo] || codigo;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -26,28 +41,48 @@ export default function ContactForm() {
     setError('');
 
     try {
+      // Salvar no Supabase
       const { error: supabaseError } = await supabase
         .from('leads')
         .insert([formData]);
 
       if (supabaseError) throw supabaseError;
 
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-      await fetch(`${supabaseUrl}/functions/v1/send-lead-email`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${anonKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.nome_completo,
-          email: formData.email,
-          phone: formData.whatsapp,
-          message: `Motivo do Contato: ${formData.motivo_contato}`
-        }),
+      // Preparar dados para EmailJS
+      const motivoFormatado = formatMotivo(formData.motivo_contato);
+      const whatsappLink = formData.whatsapp.replace(/\D/g, '');
+      const timestamp = new Date().toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
       });
+
+      // Enviar email via EmailJS
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('Configuração do EmailJS não encontrada. Verifique as variáveis de ambiente.');
+      }
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          nome_completo: formData.nome_completo,
+          email: formData.email,
+          whatsapp: formData.whatsapp,
+          whatsapp_link: whatsappLink,
+          motivo_contato: motivoFormatado,
+          timestamp: timestamp,
+          origem: 'Site'
+        },
+        publicKey
+      );
 
       setIsSuccess(true);
       setFormData({
